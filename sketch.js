@@ -1,52 +1,47 @@
-var fixedRect, movingRect;
-var gameObject1, gameObject2, gameObject3, gameObject4;
+
+const Engine = Matter.Engine;
+const World = Matter.World;
+const Bodies = Matter.Bodies;
+const Body = Matter.Body;
+
+var mango1, mango2, mango3, mango4, mango5;
+var tree;
+var rock;
+var boy;
+
+function preload()
+{
+	
+}
 
 function setup() {
-  createCanvas(1200,800);
-  movingRect = createSprite(400, 800,80,30);
-  movingRect.shapeColor = "green";
-  movingRect.debug = true;
+	createCanvas(800, 700);
 
-  gameObject1 = createSprite(100,100,50,50);
-  gameObject1.shapeColor = "green";
 
-  gameObject2 = createSprite(200,100,50,50);
-  gameObject2.shapeColor = "green";
+	engine = Engine.create();
+	world = engine.world;
 
-  gameObject3 = createSprite(300,100,50,50);
-  gameObject3.shapeColor = "green";
+	tree = new Tree(760,200,30);
 
-  gameObject4 = createSprite(400,100,50,50);
-  gameObject4.shapeColor = "green";
+	mango1 = new Mangoes(200,200,20);
+	mango2 = new Mangoes(200,200,20);
+	mango3 = new Mangoes(200,200,20);
+	mango4 = new Mangoes(200,200,20);
+	mango5 = new Mangoes(200,200,20);
 
+
+	Engine.run(engine);
+  
 }
+
 
 function draw() {
-  background(0,0,0);  
-
-  movingRect.x = World.mouseX;
-  movingRect.y = World.mouseY;
-
-  if(isTouching(movingRect,gameObject1)){
-    movingRect.shapeColor = "orange";
-    gameObject1.shapeColor = "orange";
-  }
-  else{
-    movingRect.shapeColor = "green";
-    gameObject1.shapeColor = "green";
-  }
-
+  rectMode(CENTER);
+  background(0);
+  
   drawSprites();
+ 
 }
 
-function isTouching(object1, object2){
-  if(object1.x - object2.x < object2.width/2 + object1.width/2 && 
-     object2.x - object1.x < object2.width/2 + object1.width/2 && 
-     object1.y - object2.y < object2.height/2 + object1.height/2 && 
-     object2.y - object1.y < object2.height/2 + object1.height/2){
-       return true;
-     }
-  else{
-    return false;
-  }
-}
+
+
